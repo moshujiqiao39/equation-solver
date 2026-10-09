@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>方程求解</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <svg class="logo" viewBox="0 0 48 48" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="45" height="45" rx="13" fill="#1e6b5c"/>
+        <path d="M14 18.5h20M14 29.5h20" stroke="#fffaf3" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <p class="eyebrow">本机计算 · SymPy</p>
+        <h1>方程求解</h1>
+        <p class="lede">多项式可自选元数和次数（最高 6）。超越方程、微分方程用符号键盘输入。另外可以解方程组和递推方程。</p>
+      </div>
+    </header>
+
+    <nav id="typeNav" class="type-nav" aria-label="方程类型"></nav>
+
+    <main class="layout">
+      <section class="panel editor" aria-label="输入">
+        <div id="settings"></div>
+        <div id="samples" class="chips"></div>
+        <div id="coeffBox"></div>
+        <div id="eqList"></div>
+        <button id="addEq" class="text-btn" type="button">添加一条方程</button>
+        <div id="icBlock"></div>
+        <div id="keypad" class="keypad" aria-label="符号键盘"></div>
+        <div id="summary" class="summary"></div>
+        <p id="formNote" class="note"></p>
+        <button id="solveBtn" class="solve" type="button">求解 <kbd>Ctrl</kbd><kbd>Enter</kbd></button>
+      </section>
+      <div class="side">
+        <section class="panel result-panel" id="result" aria-live="polite"></section>
+        <section class="panel graph-panel" aria-label="函数图像">
+          <div class="graph-head">
+            <h2>函数图像</h2>
+            <p id="graphNote"></p>
+          </div>
+          <div class="graph-stage" id="graphStage">
+            <canvas id="plotCanvas"></canvas>
+            <p class="graph-empty" id="graphEmpty">输入方程后，这里会按图像范围自动画出函数，并标出根、交点和极值。</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <details class="help">
+      <summary>这几类方程怎么写</summary>
+      <div class="help-grid">
+        <article>
+          <h2>多项式</h2>
+          <p>只含未知数的加减和乘方。次数按每一项里未知数指数之和计算，例如 <code>x·y²</code> 是 3 次。一元用 x，二元用 x、y，一直到六元的 u。a、b、c 会当成已知参数。</p>
+        </article>
+        <article>
+          <h2>超越方程</h2>
+          <p>可以含指数、对数和三角函数。ln 是自然对数，lg 是以 10 为底。没有公式解时，会从你给的初值附近找小数解。</p>
+        </article>
+        <article>
+          <h2>微分方程</h2>
+          <p>未知量是函数。<code>y'</code> 就是 dy/dx，<code>y''</code> 是二阶导。初值写成 <code>y(0) = 1</code>，或填在初值栏。也支持 <code>y' = z</code>、<code>z' = -y</code> 这样的方程组。</p>
+        </article>
+        <article>
+          <h2>方程组与递推</h2>
+          <p>方程组最多 6 条。递推写成 <code>a(n+1) - 2*a(n) = 0</code>，初值填 a(0)、a(1)。斐波那契数列就是这种方程。</p>
+        </article>
+      </div>
+    </details>
+    <footer>计算在打开页面的这台设备上完成，方程不会上传。在线页面：<a id="liveLink" href="https://moshujiqiao39.github.io/equation-solver/">https://moshujiqiao39.github.io/equation-solver/</a></footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="static/app.js"></script>
+</body>
+</html>
